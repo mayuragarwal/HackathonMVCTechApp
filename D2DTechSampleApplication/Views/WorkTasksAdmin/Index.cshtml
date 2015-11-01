@@ -1,0 +1,50 @@
+﻿@model IEnumerable<D2DTechSampleApplication.Models.WorkTask>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>Work Task List</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create", new { id = ViewBag.TechnicianId }, null)
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.StartDateTime)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EndDateTime)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.WorkStatus)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.StartDateTime)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.EndDateTime)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.WorkStatus)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.WorkTaskId }) |
+            @Html.ActionLink("Details", "Details", new { id=item.WorkTaskId }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.WorkTaskId })
+        </td>
+    </tr>
+}
+
+</table>
+
+<div>
+    @Html.ActionLink("Back to List", "Index", "Technicians")
+</div>

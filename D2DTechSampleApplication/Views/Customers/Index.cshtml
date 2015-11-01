@@ -1,0 +1,35 @@
+﻿@model IEnumerable<D2DTechSampleApplication.Models.Customer>
+
+@{
+    ViewBag.Title = "Customers List";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>Customers List</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            Name
+        </th>
+        <th>
+            Location
+        </th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.DisplayName)
+        </td>
+        <td>
+            @item.CustomerLocation.ToString()
+        </td>
+    </tr>
+}
+
+</table>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>

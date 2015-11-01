@@ -1,0 +1,57 @@
+﻿@model D2DTechSampleApplication.Models.Technician
+
+@{
+    ViewBag.Title = "Technician Details";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>Details Details</h2>
+
+<div>
+    <h4>Technician</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.DisplayName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DisplayName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UserName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UserName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Password)
+        </dt>
+
+        <dd>
+            XXXXXXXX
+        </dd>
+
+    </dl>
+    <br />
+    @if (Model.CurrentLocation != null)
+    {
+        @Html.Partial("~/Views/Shared/_LocationDetails.cshtml", Model.CurrentLocation)
+        <br />
+    }
+
+    @if (Model.Skills != null && Model.Skills.Count > 0)
+    {
+        foreach (var skill in Model.Skills)
+        {
+            @Html.Partial("~/Views/Technicians/_SkillDetails.cshtml", skill)
+        }
+    }
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.TechnicianId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
