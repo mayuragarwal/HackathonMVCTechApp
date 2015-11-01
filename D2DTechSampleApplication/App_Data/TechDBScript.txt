@@ -14,26 +14,28 @@ CREATE TABLE [dbo].[Skills] (
 );
 
 CREATE TABLE [dbo].[Technicians] (
-    [TechnicianId]               INT            IDENTITY (1, 1) NOT NULL,
-    [DisplayName]                NVARCHAR (MAX) NOT NULL,
-    [UserName]                   NVARCHAR (MAX) NOT NULL,
-    [Password]                   NVARCHAR (MAX) NOT NULL,
-    [CurrentLocation_LocationId] INT            NULL,
-    [Skill_SkillId]              INT            NULL,
+    [TechnicianId]  INT            IDENTITY (1, 1) NOT NULL,
+    [DisplayName]   NVARCHAR (MAX) NOT NULL,
+    [UserName]      NVARCHAR (MAX) NOT NULL,
+    [Password]      NVARCHAR (MAX) NOT NULL,
+    [LocationId]    INT            NOT NULL,
+    [Skill_SkillId] INT            NULL,
     CONSTRAINT [PK_dbo.Technicians] PRIMARY KEY CLUSTERED ([TechnicianId] ASC),
-    CONSTRAINT [FK_dbo.Technicians_dbo.Locations_CurrentLocation_LocationId] FOREIGN KEY ([CurrentLocation_LocationId]) REFERENCES [dbo].[Locations] ([LocationId]),
+    CONSTRAINT [FK_dbo.Technicians_dbo.Locations_LocationId] FOREIGN KEY ([LocationId]) REFERENCES [dbo].[Locations] ([LocationId]) ON DELETE CASCADE,
     CONSTRAINT [FK_dbo.Technicians_dbo.Skills_Skill_SkillId] FOREIGN KEY ([Skill_SkillId]) REFERENCES [dbo].[Skills] ([SkillId])
 );
 
 
 GO
-CREATE NONCLUSTERED INDEX [IX_CurrentLocation_LocationId]
-    ON [dbo].[Technicians]([CurrentLocation_LocationId] ASC);
+CREATE NONCLUSTERED INDEX [IX_LocationId]
+    ON [dbo].[Technicians]([LocationId] ASC);
 
 
 GO
 CREATE NONCLUSTERED INDEX [IX_Skill_SkillId]
     ON [dbo].[Technicians]([Skill_SkillId] ASC);
+
+
 	
 CREATE TABLE [dbo].[TechnicianSkills] (
     [Technician_TechnicianId] INT NOT NULL,
@@ -53,40 +55,43 @@ GO
 CREATE NONCLUSTERED INDEX [IX_Skill_SkillId]
     ON [dbo].[TechnicianSkills]([Skill_SkillId] ASC);
 
+
 CREATE TABLE [dbo].[Customers] (
-    [CustomerId]                  INT            IDENTITY (1, 1) NOT NULL,
-    [DisplayName]                 NVARCHAR (MAX) NULL,
-    [CustomerLocation_LocationId] INT            NULL,
+    [CustomerId]  INT            IDENTITY (1, 1) NOT NULL,
+    [DisplayName] NVARCHAR (MAX) NULL,
+    [LocationId]  INT            NOT NULL,
     CONSTRAINT [PK_dbo.Customers] PRIMARY KEY CLUSTERED ([CustomerId] ASC),
-    CONSTRAINT [FK_dbo.Customers_dbo.Locations_CustomerLocation_LocationId] FOREIGN KEY ([CustomerLocation_LocationId]) REFERENCES [dbo].[Locations] ([LocationId])
+    CONSTRAINT [FK_dbo.Customers_dbo.Locations_LocationId] FOREIGN KEY ([LocationId]) REFERENCES [dbo].[Locations] ([LocationId]) ON DELETE CASCADE
 );
 
 
 GO
-CREATE NONCLUSTERED INDEX [IX_CustomerLocation_LocationId]
-    ON [dbo].[Customers]([CustomerLocation_LocationId] ASC);
+CREATE NONCLUSTERED INDEX [IX_LocationId]
+    ON [dbo].[Customers]([LocationId] ASC);
+
 
 CREATE TABLE [dbo].[WorkTasks] (
-    [WorkTaskId]              INT      IDENTITY (1, 1) NOT NULL,
-    [StartDateTime]           DATETIME NOT NULL,
-    [EndDateTime]             DATETIME NOT NULL,
-    [WorkStatus]              INT      NOT NULL,
-    [Customer_CustomerId]     INT      NULL,
-    [Technician_TechnicianId] INT      NULL,
+    [WorkTaskId]    INT      IDENTITY (1, 1) NOT NULL,
+    [StartDateTime] DATETIME NOT NULL,
+    [EndDateTime]   DATETIME NOT NULL,
+    [WorkStatus]    INT      NOT NULL,
+    [CustomerId]    INT      NOT NULL,
+    [TechId]        INT      NOT NULL,
     CONSTRAINT [PK_dbo.WorkTasks] PRIMARY KEY CLUSTERED ([WorkTaskId] ASC),
-    CONSTRAINT [FK_dbo.WorkTasks_dbo.Customers_Customer_CustomerId] FOREIGN KEY ([Customer_CustomerId]) REFERENCES [dbo].[Customers] ([CustomerId]),
-    CONSTRAINT [FK_dbo.WorkTasks_dbo.Technicians_Technician_TechnicianId] FOREIGN KEY ([Technician_TechnicianId]) REFERENCES [dbo].[Technicians] ([TechnicianId])
+    CONSTRAINT [FK_dbo.WorkTasks_dbo.Customers_CustomerId] FOREIGN KEY ([CustomerId]) REFERENCES [dbo].[Customers] ([CustomerId]) ON DELETE CASCADE,
+    CONSTRAINT [FK_dbo.WorkTasks_dbo.Technicians_TechId] FOREIGN KEY ([TechId]) REFERENCES [dbo].[Technicians] ([TechnicianId])
 );
 
 
 GO
-CREATE NONCLUSTERED INDEX [IX_Customer_CustomerId]
-    ON [dbo].[WorkTasks]([Customer_CustomerId] ASC);
+CREATE NONCLUSTERED INDEX [IX_CustomerId]
+    ON [dbo].[WorkTasks]([CustomerId] ASC);
 
 
 GO
-CREATE NONCLUSTERED INDEX [IX_Technician_TechnicianId]
-    ON [dbo].[WorkTasks]([Technician_TechnicianId] ASC);
+CREATE NONCLUSTERED INDEX [IX_TechId]
+    ON [dbo].[WorkTasks]([TechId] ASC);
+
 
 GO
 insert into dbo.Technicians (DisplayName, UserName, Password) values('Pranjal', 'pranjal', 'pranjal')
