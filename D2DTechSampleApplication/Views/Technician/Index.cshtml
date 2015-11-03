@@ -1,0 +1,27 @@
+﻿@model D2DTechSampleApplication.Models.Technician
+
+@{
+    ViewBag.Title = "Technician Dashboard";
+    Layout = "~/Views/Shared/_TechnicianLayout.cshtml";
+}
+
+<h3>Technician - @Model.DisplayName</h3>
+
+@Html.Partial("~/Views/Technician/_TechWorkTask.cshtml", Model.WorkTasks)
+<br />
+
+@Html.Partial("~/Views/Shared/_LocationDetails.cshtml", Model.CurrentLocation)
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    @Html.Partial("~/Views/Shared/_LocationEditor.cshtml", Model.CurrentLocation)
+    <br/>
+    @Html.HiddenFor(model => model.TechnicianId)
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type = "submit" value="Update my location" class="btn btn-default" />
+        </div>
+    </div>
+}

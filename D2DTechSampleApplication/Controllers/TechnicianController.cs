@@ -6,7 +6,7 @@ using D2DTechSampleApplication.Models;
 
 namespace D2DTechSampleApplication.Controllers
 {
-    public class WorkTasksController : Controller
+    public class TechnicianController : Controller
     {
         private TechnicianDBContext db = new TechnicianDBContext();
 
@@ -18,14 +18,14 @@ namespace D2DTechSampleApplication.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             var technician = db.Technicians.Include(t => t.WorkTasks)
+                                .Include(t=>t.CurrentLocation)
                                 .FirstOrDefault(t => t.TechnicianId == id);
             if (technician == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            ViewBag.TechnicianId = technician.TechnicianId;
-            ViewBag.TechnicianDisplayName = technician.DisplayName;
-            return View(technician.WorkTasks);
+            ViewBag.TechnicianId = id.Value;
+            return View(technician);
         }
 
         // GET: WorkTasks/Details/5
@@ -79,7 +79,20 @@ namespace D2DTechSampleApplication.Controllers
                 
                 return RedirectToAction("Index", new {id = myWork.TechId });
             }
+            ViewBag.TechnicianId = workTask.TechId;
             return View(workTask);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Index(Location currentLocation, Technician tech)
+        {
+            var technician = db.Technicians.Find(tech.TechnicianId);
+            technician.CurrentLocation = currentLocation;
+            db.Entry(technician).State = EntityState.Modified;
+            db.SaveChanges();
+
+            return RedirectToAction("Index", new { id = tech.TechnicianId });
         }
 
         protected override void Dispose(bool disposing)

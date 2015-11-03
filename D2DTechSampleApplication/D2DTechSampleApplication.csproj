@@ -132,9 +132,9 @@
     <Compile Include="Controllers\CustomersController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
-    <Compile Include="Controllers\TechniciansController.cs" />
+    <Compile Include="Controllers\TechniciansAdminController.cs" />
     <Compile Include="Controllers\WorkTasksAdminController.cs" />
-    <Compile Include="Controllers\WorkTasksController.cs" />
+    <Compile Include="Controllers\TechnicianController.cs" />
     <Compile Include="Models\CompleteWorkTaskVM.cs" />
     <Compile Include="Models\Customer.cs" />
     <Compile Include="Models\User.cs" />
@@ -149,11 +149,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_Data\TechDB.mdf" />
     <Content Include="App_Data\TechDBScript.txt" />
-    <Content Include="App_Data\TechDB_log.ldf">
-      <DependentUpon>TechDB.mdf</DependentUpon>
-    </Content>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="favicon.ico" />
@@ -187,16 +183,16 @@
     <Content Include="Views\Shared\_TechnicianLayout.cshtml" />
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
-    <Content Include="Views\Technicians\Create.cshtml" />
-    <Content Include="Views\Technicians\Details.cshtml" />
-    <Content Include="Views\Technicians\Edit.cshtml" />
-    <Content Include="Views\Technicians\Index.cshtml" />
+    <Content Include="Views\TechniciansAdmin\Create.cshtml" />
+    <Content Include="Views\TechniciansAdmin\Details.cshtml" />
+    <Content Include="Views\TechniciansAdmin\Edit.cshtml" />
+    <Content Include="Views\TechniciansAdmin\Index.cshtml" />
     <Content Include="Views\Login\Index.cshtml" />
     <Content Include="Views\Shared\_LocationEditor.cshtml" />
-    <Content Include="Views\Technicians\_SkillEditor.cshtml" />
-    <Content Include="Views\WorkTasks\Details.cshtml" />
-    <Content Include="Views\WorkTasks\Edit.cshtml" />
-    <Content Include="Views\WorkTasks\Index.cshtml" />
+    <Content Include="Views\TechniciansAdmin\_SkillEditor.cshtml" />
+    <Content Include="Views\Technician\Details.cshtml" />
+    <Content Include="Views\Technician\Edit.cshtml" />
+    <Content Include="Views\Technician\Index.cshtml" />
     <Content Include="Views\Customers\Create.cshtml" />
     <Content Include="Views\Customers\Index.cshtml" />
     <Content Include="Views\Shared\_AdminLayout.cshtml" />
@@ -205,8 +201,9 @@
     <Content Include="Views\WorkTasksAdmin\Details.cshtml" />
     <Content Include="Views\WorkTasksAdmin\Edit.cshtml" />
     <Content Include="Views\WorkTasksAdmin\Index.cshtml" />
-    <Content Include="Views\Technicians\_SkillDetails.cshtml" />
+    <Content Include="Views\TechniciansAdmin\_SkillDetails.cshtml" />
     <Content Include="Views\Shared\_LocationDetails.cshtml" />
+    <Content Include="Views\Technician\_TechWorkTask.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

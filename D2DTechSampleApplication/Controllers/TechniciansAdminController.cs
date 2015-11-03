@@ -7,7 +7,7 @@ using System.Web.Mvc;
 
 namespace D2DTechSampleApplication.Controllers
 {
-    public class TechniciansController : Controller
+    public class TechniciansAdminController : Controller
     {
         private TechnicianDBContext db = new TechnicianDBContext();
 

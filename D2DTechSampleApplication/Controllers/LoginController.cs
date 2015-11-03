@@ -25,12 +25,12 @@ namespace D2DTechSampleApplication.Controllers
             {
                 if(user.UserName == "admin" && user.Password=="admin")
                 {
-                    return RedirectToAction("Index", "Technicians");
+                    return RedirectToAction("Index", "TechniciansAdmin");
                 }
                 var tech = db.Technicians.FirstOrDefault(t => t.UserName == user.UserName && t.Password == user.Password);
                 if(tech != null)
                 {
-                    return RedirectToAction("Index", "WorkTasks", new { id = tech.TechnicianId });
+                    return RedirectToAction("Index", "Technician", new { id = tech.TechnicianId });
                 }
             }
 

@@ -46,7 +46,11 @@ namespace D2DTechSampleApplication.Controllers
                                                                 Text = customer.DisplayName,
                                                                 Value = customer.CustomerId.ToString()
                                                             };
-            CompleteWorkTaskVM completeWorkTaskVM = new CompleteWorkTaskVM();
+            CompleteWorkTaskVM completeWorkTaskVM = new CompleteWorkTaskVM()
+            {
+                StartDateTime = DateTime.Now,
+                EndDateTime = DateTime.Now.AddHours(2)
+            };
             completeWorkTaskVM.TechnicianId = id.Value;
             return View(completeWorkTaskVM);
         }

@@ -8,6 +8,7 @@ namespace D2DTechSampleApplication.Models
         [Key]
         public int CustomerId { get; set; }
 
+        [Required]
         public string DisplayName { get; set; }
 
         public int LocationId { get; set; }

@@ -58,13 +58,13 @@
         {
             foreach (var skill in Model.Skills)
             {
-                @Html.Partial("~/Views/Technicians/_SkillEditor.cshtml", skill)
+                @Html.Partial("~/Views/TechniciansAdmin/_SkillEditor.cshtml", skill)
                 <br />
             }
         }
         else
         {
-            @Html.Partial("~/Views/Technicians/_SkillEditor.cshtml", new D2DTechSampleApplication.Models.Skill())
+            @Html.Partial("~/Views/TechniciansAdmin/_SkillEditor.cshtml", new D2DTechSampleApplication.Models.Skill())
         }
 
         <div class="form-group">

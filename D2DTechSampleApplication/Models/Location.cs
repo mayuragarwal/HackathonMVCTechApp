@@ -7,15 +7,18 @@ namespace D2DTechSampleApplication.Models
         [Key]
         public int LocationId { get; set; }
 
-        public float Latitute { get; set; }
+        [Required]
+        public float Latitude { get; set; }
 
-        public float Longitute { get; set; }
+        [Required]
+        public float Longitude { get; set; }
 
+        [Required]
         public string Area { get; set; }
 
         public override string ToString()
         {
-            return Area + " (Lat: " + Latitute + ", Long: " + Longitute + ")";
+            return Area + " (Lat: " + Latitude + ", Long: " + Longitude + ")";
         }
     }
 }
