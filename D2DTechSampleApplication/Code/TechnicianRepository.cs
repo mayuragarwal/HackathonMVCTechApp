@@ -1,25 +1,33 @@
-﻿using D2DTechSampleApplication.Models;
+﻿using System.Data.Entity;
+using D2DTechSampleApplication.Models;
 using System.Linq;
 
 namespace D2DTechSampleApplication.Code
 {
-    public class TechnicianRepository
+    public class TechnicianRepository : IRepository<Technician>
     {
-        TechnicianDBContext context;
+        readonly TechnicianDBContext _dbContext;
 
-        public TechnicianRepository()
+        public TechnicianRepository(DbContext dbContext)
         {
-            context = new TechnicianDBContext();
+            _dbContext = dbContext as TechnicianDBContext;
         }
          
-        public IQueryable<Technician> GetTechnicians()
+        public IQueryable<Technician> Retrieve()
         {
-            return context.Technicians;
+            return _dbContext.Technicians;
         }
 
-        public Technician GetTechnicianByUserName(string userName)
+        public void Update(Technician technician)
         {
-            return context.Technicians.FirstOrDefault(tech => tech.UserName == userName);
+            _dbContext.Entry(technician).State = EntityState.Modified;
+            _dbContext.SaveChanges();
+        }
+
+        public void Create(Technician technician)
+        {
+            _dbContext.Technicians.Add(technician);
+            _dbContext.SaveChanges();
         }
     }
 }
