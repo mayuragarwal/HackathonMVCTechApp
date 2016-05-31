@@ -28,6 +28,8 @@ namespace D2DTechSampleApplication.Code
         {
             _dbContext.Technicians.Add(technician);
             _dbContext.SaveChanges();
+            //
+            //
         }
     }
 }
