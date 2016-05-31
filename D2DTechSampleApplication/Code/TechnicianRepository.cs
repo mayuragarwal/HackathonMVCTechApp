@@ -23,11 +23,17 @@ namespace D2DTechSampleApplication.Code
             _dbContext.Entry(technician).State = EntityState.Modified;
             _dbContext.SaveChanges();
         }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="technician"></param>
 
         public void Create(Technician technician)
         {
             _dbContext.Technicians.Add(technician);
             _dbContext.SaveChanges();
+            //
+            //
         }
     }
 }

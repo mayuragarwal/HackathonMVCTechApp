@@ -8,7 +8,7 @@ namespace D2DTechSampleApplicationTests.Code
         [TestMethod]
         public void RetrieveTest()
         {
-            Assert.Fail(); ;
+            Assert.Fail();
         }
 
         [TestMethod]
