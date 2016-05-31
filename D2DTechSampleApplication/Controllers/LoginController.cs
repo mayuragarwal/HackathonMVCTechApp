@@ -10,7 +10,10 @@ namespace D2DTechSampleApplication.Controllers
     public class LoginController : Controller
     {
         public TechnicianDBContext db = new TechnicianDBContext();
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         // GET: Login
         public ActionResult Index()
         {
