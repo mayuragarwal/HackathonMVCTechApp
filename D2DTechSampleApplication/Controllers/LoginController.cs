@@ -13,11 +13,11 @@ namespace D2DTechSampleApplication.Controllers
         /// <summary>
         /// 
         /// </summary>
-        /// <returns></returns>
+        /// <returns></returns> 
         // GET: Login
         public ActionResult Index()
         {
-            return View();
+            return View(); 
         }
 
         [HttpPost]
