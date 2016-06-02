@@ -28,6 +28,7 @@ namespace D2DTechSampleApplication.Controllers
             {
                 if(user.UserName == "admin" && user.Password=="admin")
                 {
+                    ///
                     return RedirectToAction("Index", "TechniciansAdmin");
                 }
                 var tech = db.Technicians.FirstOrDefault(t => t.UserName == user.UserName && t.Password == user.Password);
